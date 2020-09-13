@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8894001622686777699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 587933828129423531}
+  - component: {fileID: 3771136680776789604}
+  - component: {fileID: 9211584900268645024}
+  - component: {fileID: 8949850701353731687}
+  - component: {fileID: 2962302329809301919}
+  - component: {fileID: 8934111413468916888}
+  - component: {fileID: 1690361871045480658}
+  m_Layer: 0
+  m_Name: SparePart_prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587933828129423531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3771136680776789604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5726d77b04f1a53448ffb9873ac0e474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Use:
+    Filter: 0
+    IgnoreStartedOverGui: 1
+    RequiredFingerCount: 0
+    RequiredMouseButtons: 0
+    RequiredSelectable: {fileID: 0}
+  IgnoreIfStatic: 0
+  onFingers:
+    m_PersistentCalls:
+      m_Calls: []
+  Coordinate: 0
+  Multiplier: 1
+  onDelta:
+    m_PersistentCalls:
+      m_Calls: []
+  onDistance:
+    m_PersistentCalls:
+      m_Calls: []
+  ScreenDepth:
+    Conversion: 1
+    Camera: {fileID: 0}
+    Object: {fileID: 0}
+    Layers:
+      serializedVersion: 2
+      m_Bits: 4294967291
+    Distance: 0
+  onWorldFrom:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorldTo:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorldDelta:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorldFromTo:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &9211584900268645024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8d8b3ece124964189f4589473b0600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Current: {x: 0, y: 0, z: 0}
+  Threshold: 45
+  Step: 1
+  onDeltaX:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeltaY:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeltaZ:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeltaXY:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8949850701353731687}
+        m_MethodName: RotateAB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeltaXYZ:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8949850701353731687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a02d09de4d378848a95de7a1d385234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  Space: 0
+  AxisA: {x: 0, y: -1, z: 0}
+  AxisB: {x: 1, y: 0, z: 0}
+  Multiplier: 1
+  Dampening: 10
+  ScaleByTime: 0
+  DefaultRotation: {x: 0, y: 0, z: 0}
+  remainingDelta: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &2962302329809301919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5726d77b04f1a53448ffb9873ac0e474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Use:
+    Filter: 0
+    IgnoreStartedOverGui: 1
+    RequiredFingerCount: 0
+    RequiredMouseButtons: 0
+    RequiredSelectable: {fileID: 0}
+  IgnoreIfStatic: 0
+  onFingers:
+    m_PersistentCalls:
+      m_Calls: []
+  Coordinate: 2
+  Multiplier: 200
+  onDelta:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9211584900268645024}
+        m_MethodName: AddXY
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDistance:
+    m_PersistentCalls:
+      m_Calls: []
+  ScreenDepth:
+    Conversion: 1
+    Camera: {fileID: 0}
+    Object: {fileID: 0}
+    Layers:
+      serializedVersion: 2
+      m_Bits: 4294967291
+    Distance: 0
+  onWorldFrom:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorldTo:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorldDelta:
+    m_PersistentCalls:
+      m_Calls: []
+  onWorldFromTo:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!33 &8934111413468916888
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_Mesh: {fileID: 0}
+--- !u!64 &1690361871045480658
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894001622686777699}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
