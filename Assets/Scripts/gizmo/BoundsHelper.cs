@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using models;
+using models.mesh;
 using UnityEngine;
 
 namespace gizmo
@@ -68,6 +70,13 @@ namespace gizmo
             return mPositions;
         }
     
+        public static void HighlightTris(Tris3 tris, Color lineColor, float duration)
+        {
+            Debug.DrawRay(tris.MiddlePointGlobal, tris.NormalGlobal, lineColor, duration);
+            Debug.DrawLine(tris.V0Global, tris.V1Global, lineColor, duration);
+            Debug.DrawLine(tris.V1Global, tris.V2Global, lineColor, duration);
+            Debug.DrawLine(tris.V2Global, tris.V0Global, lineColor, duration);            
+        }
     
     }
 }

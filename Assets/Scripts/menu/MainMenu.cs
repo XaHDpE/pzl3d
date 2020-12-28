@@ -1,19 +1,27 @@
-﻿using UnityEngine;
+﻿using loaders.scenes;
+using UnityEngine;
 
 namespace menu
 {
     public class MainMenu : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public void PlayGame()
         {
-        
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            ChapterSelectLoader.LoadScene(new ChapterSelectInputParams()
+            {
+                param1 = "test2"
+            }, (outputParams) =>
+            {
+                if (outputParams is ChapterSelectOutParams outParams) print($"test done, params: {outParams.outParam1}");
+            });
         }
 
-        // Update is called once per frame
-        void Update()
+        public void QuitGame()
         {
-        
+            Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
+    
 }

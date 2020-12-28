@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace settings
 {
@@ -7,7 +6,14 @@ namespace settings
     public class GameSettings : ScriptableObject
     {
         [SerializeField] private GameObject sparePartPrefab;
-        [SerializeField] private GameManager gameManager;
+        [SerializeField] private GameObject sparePartSelectedPrefab;
+        [SerializeField] private GameObject spSelectedTop;
+
+        public GameObject OnSpSelectedTop
+        {
+            get => spSelectedTop;
+            set => spSelectedTop = value;
+        }
 
         public GameObject SparePartPrefab
         {
@@ -15,9 +21,11 @@ namespace settings
             set => sparePartPrefab = value;
         }
 
-        private void Awake()
+        public GameObject SparePartSelectedPrefab
         {
-            gameManager = FindObjectOfType<GameManager>();
+            get => sparePartSelectedPrefab;
+            set => sparePartSelectedPrefab = value;
         }
+
     }
 }

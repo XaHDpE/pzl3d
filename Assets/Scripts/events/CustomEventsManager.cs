@@ -1,6 +1,5 @@
 ﻿using Lean.Touch;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace events
 {
@@ -9,12 +8,26 @@ namespace events
         // Delegates
         public delegate void FingerTapDelegate();
         public delegate void SparePartUnderRayCastDelegate(Transform sp, int subMeshIndex);
+        public delegate void CompositeRotationRequestedDelegate();
+        public delegate void SparePartMovementRequestedDelegate();
+        public delegate void SparePartRotationRequestedDelegate();
     
         // Events
         public event FingerTapDelegate SparePartSelected;
         public event FingerTapDelegate NoneIsSelected;
         public event SparePartUnderRayCastDelegate SparePartUnderRayCast;
-        
+        public event CompositeRotationRequestedDelegate CompositeRotationRequested;
+        public event SparePartMovementRequestedDelegate SparePartMovementRequested;
+        public event SparePartRotationRequestedDelegate SparePartRotationRequested;
+
+        private void OnEnable()
+        {
+        }
+
+        private void OnDisable()
+        {
+        }
+
         public void OnFingerTap(LeanFinger v)
         {
             print($"LeanSelectable.IsSelectedCount: {LeanSelectable.IsSelectedCount}");
@@ -34,6 +47,8 @@ namespace events
         {
             SparePartUnderRayCast?.Invoke(sp, subMeshIndex);
         }
+        
+        
 
     }
 }

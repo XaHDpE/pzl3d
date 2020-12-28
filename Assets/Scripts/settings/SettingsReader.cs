@@ -1,18 +1,20 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace settings
 {
     public class SettingsReader : MonoBehaviour
     {
-        public static SettingsReader Instance { get; private set; }
+        private static SettingsReader instance;
 
-        [SerializeField] private GameSettings gameSettings;
-        public GameSettings GameSettings => gameSettings;
+        public static SettingsReader Instance => instance;
 
         private void Awake()
         {
-            Instance = this;
+            instance = this;
         }
+
+        [SerializeField] private GameSettings gameSettings;
+
+        public GameSettings GameSettings => gameSettings;
     }
 }

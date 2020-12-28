@@ -28,8 +28,25 @@ namespace gizmo
             DrawBox();
         }
 
+        private Bounds CalculateLocalBounds()
+        {
+                var currentRotation = transform.rotation;
+                transform.rotation = Quaternion.Euler(0f,0f,0f);
+                var bounds = new Bounds(transform.position, Vector3.zero);
+                foreach(var rend in GetComponentsInChildren<Renderer>())
+                {
+                    bounds.Encapsulate(rend.bounds);
+                }
+                var localCenter = bounds.center - transform.position;
+                bounds.center = localCenter;
+                transform.rotation = currentRotation;
+                return bounds;
+        }
+        
         private void CalcPositons(){
-            var bounds = GetComponent<MeshFilter>().mesh.bounds;
+            // var bounds = GetComponent<MeshFilter>().sharedMesh.bounds;
+            var bounds = CalculateLocalBounds();
+            // var bounds = GetLocalBoundsForObject(transform.gameObject);
          
             //Bounds bounds;
             //BoxCollider bc = GetComponent<BoxCollider>();
@@ -75,6 +92,31 @@ namespace gizmo
             Debug.DrawLine (v3FrontTopRight, v3BackTopRight, color);
             Debug.DrawLine (v3FrontBottomRight, v3BackBottomRight, color);
             Debug.DrawLine (v3FrontBottomLeft, v3BackBottomLeft, color);
+        }
+        
+        static Bounds GetLocalBoundsForObject(GameObject go)
+        {
+            var referenceTransform = go.transform;
+            var b = new Bounds(Vector3.zero, Vector3.zero);
+            RecurseEncapsulate(referenceTransform, ref b);
+            return b;
+                       
+            void RecurseEncapsulate(Transform child, ref Bounds bounds)
+            {
+                var mesh = child.GetComponent<MeshFilter>();
+                if (mesh)
+                {
+                    var lsBounds = mesh.sharedMesh.bounds;
+                    var wsMin = child.TransformPoint(lsBounds.center - lsBounds.extents);
+                    var wsMax = child.TransformPoint(lsBounds.center + lsBounds.extents);
+                    bounds.Encapsulate(referenceTransform.InverseTransformPoint(wsMin));
+                    bounds.Encapsulate(referenceTransform.InverseTransformPoint(wsMax));
+                }
+                foreach (Transform grandChild in child.transform)
+                {
+                    RecurseEncapsulate(grandChild, ref bounds);
+                }
+            }
         }
      
     }
