@@ -1,42 +1,50 @@
-﻿using System;
+﻿using input;
 using UnityEngine;
 
 namespace camera
 {
     public class CameraController : MonoBehaviour
     {
-        public float cameraDistance = ScreenConstants.DefaultDepth;
-        private Transform _target;
-        private Camera cam;
+        // public variables
+        
+        // private variables
+        private Camera _cam;
+        
+        // events and delegates
+        public delegate void CarouselCameraSetDelegate(Camera cam, Vector3 target, float zSize);
+        public static event CarouselCameraSetDelegate CarouselCameraSet;
+        
 
-        public void SetTarget(Transform target)
+        private void Awake()
         {
-            _target = target;
-            // Debug.DrawRay(transform.position, -(target.position - Vector3.zero), Color.blue, 20f);
+            _cam = transform.GetComponent<Camera>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            cam = transform.GetComponent<Camera>();
+            Carousel5.CarouselArranged += AlignWith;
+        }
+        
+        private void OnDisable()
+        {
+            Carousel5.CarouselArranged -= AlignWith;
         }
 
-        private void Update()
+        private void AlignWith(Vector3 carouselExtents, Vector3 lookPoint, Vector3 lookDirection)
         {
-            if (_target == null) return;
-            var newPos = (_target.position - Vector3.zero) * cameraDistance;
-            
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(-newPos.normalized),
-                Time.fixedDeltaTime * 2.0f);
-            
-            transform.position = Vector3.Lerp(transform.position, newPos, Time.fixedDeltaTime * 2.0f);
-
-            var bounds = _target.GetComponent<MeshFilter>().mesh.bounds;
-
-            var p1 = cam.WorldToViewportPoint(bounds.min);
-            var p2 = cam.WorldToViewportPoint(bounds.max);
-            
-            Debug.Log($"p1: {p1}, p2: {p2}");
-            
+            const float margin = 0.65f;
+            const float yAngle = 15.0f;
+            var maxExtent = carouselExtents.magnitude;
+            var minDistance = (maxExtent * margin) / Mathf.Sin(Mathf.Deg2Rad * _cam.fieldOfView / 2.0f);
+            _cam.nearClipPlane = minDistance - maxExtent;
+            // Debug.Log($"logs: {minDistance}, {maxExtent}");
+            _cam.farClipPlane = 140;
+            var transform1 = transform;
+            transform1.position = lookPoint + lookPoint.normalized * minDistance + transform1.up * yAngle;
+            transform1.rotation = Quaternion.LookRotation(-lookPoint);
+            CarouselCameraSet?.Invoke(_cam, lookPoint, carouselExtents.z);
         }
+        
+
     }
 }

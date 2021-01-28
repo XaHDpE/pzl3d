@@ -1,62 +1,72 @@
-﻿using events;
+﻿using System;
+using System.Linq;
 using models.state;
 using states.sparepart;
 using UnityEngine;
 
 namespace states.controllers
 {
+    [Serializable]
     public class InputManagerController : MonoBehaviour
     {
+        // public variables
         public Transform sparePart;
-        public CustomEventsManager eventMgr;
 
-        private ObjectBaseState CurrentState { get; set; }
+        public string stateName;
+        public ObjectBaseState CurrentState { get; set; }
 
-        private readonly SparePartRotatableState _spRotateState = new SparePartRotatableState();
-        private readonly SparePartMoveState _spMoveState = new SparePartMoveState();
-        private readonly SparePartIdleState _spIdleState = new SparePartIdleState();
-        public readonly CompositeIdleState CompositeIdleState = new CompositeIdleState();
-        private readonly CompositeRotateState _compositeRotState = new CompositeRotateState();
+        private readonly CarouselItemSelectedState _spSelectedInCarouselState = new CarouselItemSelectedState();
+        private readonly CarouselItemIdleState _spIdleState = new CarouselItemIdleState();
+        private readonly TopBarSparePartState _spInTopBar = new TopBarSparePartState();
 
-        private void OnEnable()
-        {
-            // eventMgr.SparePartMovementRequested += EnableSpMovement;
-            // eventMgr.CompositeRotationRequested += EnableCompositeMovement;
-            // eventMgr.SparePartRotationRequested += EnableSpRotation;
-        }
-
-        public void EnableSpRotation()
-        {
-            TransitionToState(_spRotateState);
-        }
-
-        public void EnableSpMovement()
-        {
-            TransitionToState(_spMoveState);
-        }
-
-        public void EnableCompositeMovement()
-        {
-            TransitionToState(_compositeRotState);
-        }
-
-        private void EnableSpIdle()
-        {
-            TransitionToState(_spIdleState);
-        }
-    
+        // Internal State methods
         private void TransitionToState(ObjectBaseState state)
         {
+            stateName = state.GetType().Name;
             CurrentState?.ExitState(this);
             CurrentState = state;
             CurrentState.EnterState(this); 
             // print($"object: {sparePart}, entered state : {state}");
         }
-    
+        
+        // MonoBehaviour events for states re-definition 
+        private void OnEnable()
+        {
+            sparePart = transform;
+        }
+
         private void Start()
         {
-            TransitionToState(_compositeRotState);
+            TransitionToState(_spIdleState);
         }
+
+        private void Update()
+        {
+            CurrentState.LogicUpdate(this);
+        }
+
+        private void FixedUpdate()
+        {
+            CurrentState.PhysicsUpdate(this);
+        }
+
+        // External transition methods
+        public void MoveToSelectedInList()
+        {
+            TransitionToState(_spSelectedInCarouselState);
+        }
+
+        public void MoveToIdle()
+        {
+            TransitionToState(_spIdleState);
+        }
+
+        public void MoveToSelectedInTopBarState()
+        {
+            TransitionToState(_spInTopBar);
+        }
+    
+
 
     }
 }

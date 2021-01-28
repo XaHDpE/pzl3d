@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace gizmo
 {
@@ -28,6 +29,11 @@ namespace gizmo
             DrawBox();
         }
 
+        private void DrawSphere()
+        {
+            
+        }
+
         private Bounds CalculateLocalBounds()
         {
                 var currentRotation = transform.rotation;
@@ -41,6 +47,21 @@ namespace gizmo
                 bounds.center = localCenter;
                 transform.rotation = currentRotation;
                 return bounds;
+        }
+        
+        public static Bounds CalculateLocalBounds(Transform target)
+        {
+            var currentRotation = target.rotation;
+            target.rotation = Quaternion.Euler(0f,0f,0f);
+            var bounds = new Bounds(target.position, Vector3.zero);
+            foreach(var rend in target.GetComponentsInChildren<Renderer>())
+            {
+                bounds.Encapsulate(rend.bounds);
+            }
+            var localCenter = bounds.center - target.position;
+            bounds.center = localCenter;
+            target.rotation = currentRotation;
+            return bounds;
         }
         
         private void CalcPositons(){
@@ -92,6 +113,7 @@ namespace gizmo
             Debug.DrawLine (v3FrontTopRight, v3BackTopRight, color);
             Debug.DrawLine (v3FrontBottomRight, v3BackBottomRight, color);
             Debug.DrawLine (v3FrontBottomLeft, v3BackBottomLeft, color);
+
         }
         
         static Bounds GetLocalBoundsForObject(GameObject go)

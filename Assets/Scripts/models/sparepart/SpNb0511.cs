@@ -277,7 +277,7 @@ namespace models.sparepart
         private bool _verticesDone;
         private ICollection<EdgeVector> _edges = new List<EdgeVector>();
         
-        void OnGUI() {
+        /*void OnGUI() {
             if (_edges.Count == 0) return;
             if (_verticesDone) return;
             for (var i = 0; i < GetMesh().vertexCount; i++) {
@@ -289,7 +289,7 @@ namespace models.sparepart
             }
 
             _verticesDone = true;
-        }
+        }*/
 
 
         private void ShowNormalsAndTris()

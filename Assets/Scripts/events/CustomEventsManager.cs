@@ -11,6 +11,7 @@ namespace events
         public delegate void CompositeRotationRequestedDelegate();
         public delegate void SparePartMovementRequestedDelegate();
         public delegate void SparePartRotationRequestedDelegate();
+
     
         // Events
         public event FingerTapDelegate SparePartSelected;
@@ -19,14 +20,10 @@ namespace events
         public event CompositeRotationRequestedDelegate CompositeRotationRequested;
         public event SparePartMovementRequestedDelegate SparePartMovementRequested;
         public event SparePartRotationRequestedDelegate SparePartRotationRequested;
-
-        private void OnEnable()
-        {
-        }
-
-        private void OnDisable()
-        {
-        }
+        
+        // carousel events
+        
+        // camera events
 
         public void OnFingerTap(LeanFinger v)
         {
@@ -47,8 +44,6 @@ namespace events
         {
             SparePartUnderRayCast?.Invoke(sp, subMeshIndex);
         }
-        
-        
 
     }
 }

@@ -8,9 +8,7 @@ namespace debug
 {
     public class ObjectDebugger : MonoBehaviour
     {
-        private Collider _collider;
-        private Camera _cam;
-        
+
         public void SetText(string text)
         {
             var extents = transform.GetComponent<Collider>().bounds.extents;

@@ -1,4 +1,4 @@
-﻿using input;
+﻿    using input;
 using models.state;
 using states.controllers;
 
@@ -18,6 +18,16 @@ namespace states.sparepart
         {
             // inputManager.sparePart.GetComponent<ISwitchable>().Off();
             _rotationComponent.enabled = false;
+        }
+
+        public override void LogicUpdate(InputManagerController inputManager)
+        {
+            
+        }
+
+        public override void PhysicsUpdate(InputManagerController inputManager)
+        {
+            
         }
         
     }
